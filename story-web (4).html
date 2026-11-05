@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>الساحة الأدبية — نسخة ويب موسّعة</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#F0F2F5;--card:#fff;--line:#E0E0E0;--text:#1A1A1A;--muted:#616161;--blue:#1565C0;--purple:#6A1B9A;--teal:#00897B;--shadow:0 10px 28px rgba(20,30,50,.08);--font:"Noto Sans Arabic",Tahoma,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:var(--font);background:var(--bg);color:var(--text);direction:rtl}
+button,input,textarea,select{font-family:inherit}.hidden{display:none!important}
+.screen{min-height:100vh}
+.auth{display:grid;place-items:center;padding:24px 14px;position:relative;overflow:hidden}
+.auth::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 15%,rgba(21,101,192,.16),transparent 42%),linear-gradient(180deg,#E8F0FE,#fff 60%)}
+.auth.reg::before{background:radial-gradient(circle at 15% 15%,rgba(106,27,154,.14),transparent 42%),linear-gradient(180deg,#F3E5F5,#fff 60%)}
+.auth-box{position:relative;width:min(440px,100%);z-index:1}
+.logo{width:90px;height:90px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;color:#fff;font-size:34px;font-weight:800;box-shadow:var(--shadow)}
+.logo.b{background:linear-gradient(145deg,#1E88E5,#0D47A1)}.logo.p{background:linear-gradient(145deg,#8E24AA,#4A148C)}
+.auth-box h1{margin:0 0 6px;text-align:center;font-size:26px;color:#000}
+.auth-box .sub{margin:0 0 18px;text-align:center;color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+label{display:block;font-size:13px;font-weight:700;color:#000;margin:0 0 6px}
+input,textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;background:#FAFAFA;color:#000;padding:12px 14px;font-size:15px;margin:0 0 12px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(21,101,192,.12)}
+.btn{border:0;border-radius:14px;padding:13px 16px;font-weight:800;font-size:15px;color:#fff;cursor:pointer;width:100%}
+.btn:active{transform:scale(.98)}.btn-blue{background:linear-gradient(135deg,#1E88E5,#1565C0)}.btn-purple{background:linear-gradient(135deg,#8E24AA,#6A1B9A)}.btn-teal{background:linear-gradient(135deg,#26A69A,#00897B)}
+.btn-sm{width:auto;padding:8px 14px;border-radius:12px;font-size:13px}.btn-ghost{background:#fff;color:var(--blue);border:1px solid var(--line)}.btn-danger{background:#C62828}
+.link{display:block;width:100%;margin-top:14px;background:none;border:0;font-weight:700;font-size:14px;cursor:pointer}.link.p{color:var(--purple)}.link.b{color:var(--blue)}
+.main{display:flex;flex-direction:column;height:100vh;max-height:100dvh}
+.topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+.topbar h2{flex:1;margin:0;text-align:center;font-size:16px}
+.icon-btn,.avatar-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:800}
+.avatar-btn{border:0;background:linear-gradient(135deg,#42A5F5,#1565C0);color:#fff}
+.content{flex:1;overflow:auto;padding:12px 12px 100px;max-width:980px;width:100%;margin:0 auto}
+.pane{animation:up .2s ease}@keyframes up{from{opacity:.5;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{border-radius:18px;padding:16px;margin-bottom:12px;color:#fff;box-shadow:var(--shadow)}
+.hero.plaza{background:linear-gradient(135deg,#1E88E5,#0D47A1)}.hero.blog{background:linear-gradient(135deg,#8E24AA,#4A148C)}.hero.khayal{background:linear-gradient(135deg,#26A69A,#00695C)}.hero.lib{background:linear-gradient(135deg,#5C6BC0,#283593)}.hero.set{background:linear-gradient(135deg,#78909C,#455A64)}
+.hero h3{margin:0 0 4px;font-size:20px}.hero p{margin:0;opacity:.92;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.novel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:.15s;position:relative}
+.novel:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.cover{height:150px;background:linear-gradient(135deg,#90CAF9,#1565C0);display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.meta{padding:10px 12px 12px}.meta h4{margin:0 0 4px;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta .author{margin:0;font-size:12px;color:var(--blue);font-weight:700}.meta .sub{margin:4px 0 0;font-size:11px;color:#757575}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.composer textarea{min-height:84px;resize:vertical}
+.posts{display:flex;flex-direction:column;gap:12px}
+.post{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}
+.post-h{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#AB47BC,#6A1B9A);color:#fff;display:grid;place-items:center;font-weight:800;overflow:hidden;flex:0 0 auto}
+.post-user{font-weight:800;cursor:pointer}.post-time{font-size:11px;color:#9E9E9E}
+.post-text{margin:0 0 12px;white-space:pre-wrap;line-height:1.7}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line);background:#FAFAFA;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--blue);cursor:pointer}
+.chip-btn.liked{background:#FFEBEE;border-color:#FFCDD2;color:#C62828}
+.comments{margin-top:12px;border-top:1px solid #F0F0F0;padding-top:10px}
+.c-row{padding:8px 0;font-size:13px;border-bottom:1px solid #F7F7F7}
+.reply{margin:6px 0 6px 12px;padding:8px;background:#FAFAFA;border-radius:10px;font-size:12px}
+.c-form{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.c-form input{margin:0;flex:1;min-width:120px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;color:#424242}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.reader{background:#FFFDF8;border:1px solid #EDE0C8;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.reader.protect{-webkit-user-select:none;user-select:none}
+.reader .big-cover{width:100%;max-height:280px;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#90CAF9,#1565C0);display:grid;place-items:center;color:#fff;font-size:42px;font-weight:800;margin-bottom:14px}
+.reader .big-cover img{width:100%;max-height:280px;object-fit:cover}
+.reader h2{margin:0 0 6px;font-size:22px;text-align:center}
+.reader .by{display:block;text-align:center;background:none;border:0;color:var(--blue);font-weight:700;margin:0 auto 10px;cursor:pointer}
+.chap-nav{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:12px 0;flex-wrap:wrap}
+.chap-nav select{width:auto;margin:0;min-width:140px}
+.reader-body{line-height:1.95;font-size:16.5px;white-space:pre-wrap;text-align:right;color:#1A1A1A}
+.para-block{margin:0 0 16px;padding-bottom:12px;border-bottom:1px dashed #EAD9B8}
+.para-tools{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.profile{text-align:center;padding:22px 14px;margin-bottom:14px}
+.profile .pav{width:88px;height:88px;border-radius:50%;margin:0 auto 12px;background:linear-gradient(135deg,#42A5F5,#1565C0);color:#fff;display:grid;place-items:center;font-size:34px;font-weight:800}
+.stat{display:inline-block;margin:6px 4px 0;background:#E3F2FD;color:var(--blue);border-radius:999px;padding:6px 14px;font-weight:800;font-size:13px}
+.section-t{margin:6px 0 12px;font-size:16px}
+.empty{text-align:center;color:var(--muted);padding:36px 10px}
+.note{text-align:center;color:var(--muted);font-size:12px;margin-top:16px}
+.fab{position:fixed;left:18px;bottom:90px;z-index:25;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#26A69A,#00695C);color:#fff;font-size:28px;font-weight:800;box-shadow:var(--shadow);cursor:pointer}
+.bottom{position:fixed;left:0;right:0;bottom:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(240,242,245,.96) 28%,#F5F5F5);z-index:30}
+.nav{position:relative;max-width:980px;margin:0 auto;display:flex;height:60px;background:#fff;border:1px solid var(--line);border-radius:30px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.slider{position:absolute;top:4px;bottom:4px;width:calc(33.333% - 8px);right:4px;border-radius:26px;background:var(--blue);transition:transform .28s cubic-bezier(.2,.85,.2,1),background .2s;z-index:0}
+.nav button{flex:1;position:relative;z-index:1;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:800;color:#546E7A}
+.nav button.on{color:#fff}
+.drawer{position:fixed;inset:0;z-index:40}.scrim{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.panel{position:absolute;top:0;bottom:0;right:0;width:min(320px,86vw);background:#fff;padding:18px 14px;box-shadow:-8px 0 28px rgba(0,0,0,.12);overflow:auto}
+.d-item{width:100%;text-align:right;border:1px solid var(--line);background:#FAFAFA;border-radius:12px;padding:12px;margin:0 0 8px;font-weight:700;cursor:pointer}
+.d-item.danger{color:#C62828;background:#FFF5F5;border-color:#FFCDD2}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#263238;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;z-index:60;max-width:92%}
+.loading{position:fixed;inset:0;background:rgba(255,255,255,.55);display:grid;place-items:center;z-index:70}
+.spinner{width:38px;height:38px;border-radius:50%;border:3px solid #E0E0E0;border-top-color:var(--blue);animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.banner{background:#E3F2FD;border:1px solid #90CAF9;color:#0D47A1;border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-weight:700;font-size:13px}
+.banner button{width:auto}
+.editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.warn{background:#FFF8E1;border:1px solid #FFE082;color:#5D4037;border-radius:12px;padding:10px 12px;font-size:12px;margin-bottom:12px}
+.page-sheet{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;min-height:200px}
+.page-num{text-align:left;color:#757575;font-size:12px;margin-bottom:8px}
+.fn-line{border-top:1px solid #BDBDBD;margin-top:16px;padding-top:8px;font-size:12px;color:#424242}
+.fn-ref{font-size:10px;vertical-align:super;color:var(--blue);cursor:pointer}
+.modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px}
+.modal .scrim{background:rgba(0,0,0,.45)}
+.modal .box{position:relative;z-index:1;background:#fff;border-radius:16px;padding:16px;width:min(420px,100%);max-height:80vh;overflow:auto;box-shadow:var(--shadow)}
+.stats-bar{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="app">
+<section id="s-login" class="screen auth">
+  <div class="auth-box">
+    <div class="logo b">ق</div>
+    <h1>تسجيل الدخول</h1>
+    <p class="sub">مرحباً بعودتك إلى الساحة الأدبية</p>
+    <div class="card">
+      <label>الاسم المستعار</label><input id="login-user" type="text"/>
+      <label>كلمة المرور</label><input id="login-pass" type="password"/>
+      <button class="btn btn-blue" id="btn-login">دخول</button>
+    </div>
+    <button class="link p" id="go-reg">ليس لديك حساب؟ إنشاء حساب</button>
+  </div>
+</section>
+<section id="s-reg" class="screen auth reg hidden">
+  <div class="auth-box">
+    <div class="logo p">ج</div>
+    <h1>إنشاء حساب</h1>
+    <p class="sub">انضم إلى الساحة الأدبية وابدأ الكتابة</p>
+    <div class="card">
+      <label>الاسم المستعار</label><input id="reg-user" type="text"/>
+      <label>كلمة المرور</label><input id="reg-pass" type="password"/>
+      <label>تأكيد كلمة المرور</label><input id="reg-pass2" type="password"/>
+      <button class="btn btn-purple" id="btn-reg">إنشاء الحساب</button>
+    </div>
+    <button class="link b" id="go-login">لديك حساب؟ تسجيل الدخول</button>
+  </div>
+</section>
+
+<section id="s-main" class="screen main hidden">
+  <header class="topbar">
+    <button class="icon-btn" id="btn-menu">☰</button>
+    <h2 id="title">الساحة الأدبية</h2>
+    <button class="avatar-btn" id="btn-me">أ</button>
+  </header>
+  <main class="content">
+    <div id="p-plaza" class="pane">
+      <div class="hero plaza"><h3>الساحة الأدبية</h3><p>الروايات المنشورة</p></div>
+      <div id="resume-banner" class="banner hidden">
+        <span id="resume-text">ابدأ من حيث توقفت</span>
+        <button class="btn btn-blue btn-sm" id="btn-resume">أكمل</button>
+      </div>
+      <input id="q" type="search" placeholder="ابحث عن رواية أو مؤلف..."/>
+      <div id="novels" class="grid"></div>
+      <div id="plaza-empty" class="empty hidden">لا توجد روايات</div>
+    </div>
+
+    <div id="p-blog" class="pane hidden">
+      <div class="hero blog"><h3>تدوينة</h3><p>منشورات المجتمع</p></div>
+      <div class="card composer">
+        <textarea id="post-text" placeholder="اكتب تدوينة..."></textarea>
+        <div class="row">
+          <select id="post-exp"><option value="1">يوم</option><option value="3">3 أيام</option><option value="7" selected>أسبوع</option></select>
+          <div class="row">
+            <button class="btn btn-ghost btn-sm" id="btn-draft">حفظ مسودة</button>
+            <button class="btn btn-blue btn-sm" id="btn-post">نشر</button>
+          </div>
+        </div>
+      </div>
+      <div id="posts" class="posts"></div>
+      <div id="blog-empty" class="empty hidden">لا منشورات</div>
+    </div>
+
+    <div id="p-khayal" class="pane hidden">
+      <div class="hero khayal"><h3>قسم خيال</h3><p>السلسلة · القصص · التأليف</p></div>
+      <div class="chips" id="k-chips">
+        <button class="chip on" data-f="all">الكل</button>
+        <button class="chip" data-f="series">السلسلة</button>
+        <button class="chip" data-f="stories">القصص</button>
+        <button class="chip" data-f="book">التأليف</button>
+      </div>
+      <div class="row" style="margin-bottom:12px">
+        <button class="btn btn-teal btn-sm" id="btn-new-work">+ عمل جديد</button>
+        <button class="btn btn-ghost btn-sm" id="btn-open-lib">مكتبتي</button>
+      </div>
+      <div id="works" class="grid"></div>
+    </div>
+
+    <div id="p-library" class="pane hidden">
+      <div class="hero lib"><h3>مكتبتي</h3><p>محفوظة على هذا الجهاز 30 يوماً</p></div>
+      <div id="lib-grid" class="grid"></div>
+      <div id="lib-empty" class="empty hidden">المكتبة فارغة</div>
+    </div>
+
+    <div id="p-settings" class="pane hidden">
+      <div class="hero set"><h3>إعدادات القراءة</h3><p>تُحفظ على هذا الجهاز</p></div>
+      <div class="card">
+        <label>حجم خط القراءة: <span id="set-size-val">17</span></label>
+        <input id="set-size" type="range" min="14" max="28" value="17" style="padding:0"/>
+        <label>تباعد الأسطر: <span id="set-lh-val">1.95</span></label>
+        <input id="set-lh" type="range" min="140" max="260" value="195" style="padding:0"/>
+        <label><input id="set-protect" type="checkbox" checked style="width:auto;margin-left:8px"/> محاولة منع النسخ أثناء القراءة</label>
+        <button class="btn btn-blue" id="btn-save-set" style="margin-top:12px">حفظ الإعدادات</button>
+      </div>
+    </div>
+
+    <div id="p-create" class="pane hidden">
+      <div class="card">
+        <h3 class="section-t">إنشاء عمل</h3>
+        <label>عنوان العمل</label><input id="c-title"/>
+        <label>اسم المؤلف الظاهر</label><input id="c-author"/>
+        <label>نبذة</label><textarea id="c-desc" rows="3"></textarea>
+        <label>النوع</label>
+        <select id="c-kind">
+          <option value="series">سلسلة</option>
+          <option value="novel">قصة/رواية</option>
+          <option value="book">تأليف/كتاب</option>
+        </select>
+        <div id="c-part-wrap" class="hidden">
+          <label>رقم الجزء (للسلسلة)</label><input id="c-part" placeholder="1"/>
+        </div>
+        <label>رابط الغلاف (اختياري)</label><input id="c-cover" placeholder="https://..."/>
+        <label>أو الصق صورة غلاف Base64 (اختياري)</label><textarea id="c-cover-b64" rows="2" placeholder="data:image/... أو نص base64"></textarea>
+        <button class="btn btn-teal" id="btn-create">إنشاء وفتح المحرر</button>
+        <button class="btn btn-ghost" id="btn-create-back" style="margin-top:8px">رجوع</button>
+      </div>
+    </div>
+
+    <div id="p-editor" class="pane hidden">
+      <div class="warn">محرر ويب موسّع: فصول + فقرات + هوامش للكتب + تصدير نص/HTML. خصائص أندرويد المتقدمة جداً تبقى في التطبيق.</div>
+      <div class="card" style="margin-bottom:12px">
+        <h3 id="e-title" class="section-t">—</h3>
+        <div class="stats-bar"><span id="e-words">كلمات: 0</span><span id="e-chars">أحرف: 0</span></div>
+        <div class="editor-toolbar">
+          <button class="btn btn-ghost btn-sm" id="e-add-ch">+ فصل</button>
+          <button class="btn btn-ghost btn-sm" id="e-del-ch">حذف فصل</button>
+          <button class="btn btn-ghost btn-sm" id="e-add-para">+ فقرة</button>
+          <button class="btn btn-ghost btn-sm" id="e-add-fn">+ هامش</button>
+          <button class="btn btn-blue btn-sm" id="e-save">حفظ</button>
+          <button class="btn btn-purple btn-sm" id="e-publish">نشر</button>
+          <button class="btn btn-ghost btn-sm" id="e-export-txt">تصدير نص</button>
+          <button class="btn btn-ghost btn-sm" id="e-export-html">تصدير HTML</button>
+        </div>
+        <label>الفصل</label>
+        <select id="e-chap"></select>
+        <label>عنوان الفصل</label>
+        <input id="e-ch-title"/>
+        <label>وضع المحرر</label>
+        <select id="e-mode">
+          <option value="chapter">نص الفصل كاملاً</option>
+          <option value="paragraphs">فقرات</option>
+          <option value="book">كتاب/صفحات + هوامش</option>
+        </select>
+        <div id="e-chapter-box">
+          <label>نص الفصل</label>
+          <textarea id="e-ch-body" rows="12"></textarea>
+        </div>
+        <div id="e-para-box" class="hidden">
+          <div id="e-paras"></div>
+          <p class="note">كل فقرة مستقلة. احذف أو عدّل ثم احفظ.</p>
+        </div>
+        <div id="e-book-box" class="hidden">
+          <label>ترقيم الهوامش</label>
+          <select id="e-fn-mode"><option value="continuous">مستمر</option><option value="per_page">لكل صفحة</option></select>
+          <label>الحد الأقصى للأسطر في الصفحة</label>
+          <input id="e-max-lines" type="number" min="20" max="50" value="36"/>
+          <div class="page-sheet">
+            <div class="page-num" id="e-page-num">1</div>
+            <textarea id="e-page-body" rows="12" placeholder="نص الصفحة..."></textarea>
+            <div class="fn-line">
+              <strong>الهوامش</strong>
+              <div id="e-fn-list"></div>
+              <div class="row" style="margin-top:8px">
+                <input id="e-fn-text" placeholder="نص الهامش الجديد" style="margin:0;flex:1"/>
+                <button class="btn btn-ghost btn-sm" id="e-fn-add">إضافة</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-ghost btn-sm" id="e-page-prev">صفحة سابقة</button>
+            <button class="btn btn-ghost btn-sm" id="e-page-next">صفحة تالية</button>
+            <button class="btn btn-ghost btn-sm" id="e-page-add">+ صفحة</button>
+            <button class="btn btn-danger btn-sm" id="e-page-del">حذف صفحة</button>
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn btn-ghost btn-sm" id="e-prev">السابق</button>
+          <button class="btn btn-ghost btn-sm" id="e-next">التالي</button>
+          <button class="btn btn-ghost btn-sm" id="e-back">رجوع</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="p-reader" class="pane hidden">
+      <article class="reader protect" id="reader-sheet">
+        <div class="big-cover" id="r-cover">ر</div>
+        <h2 id="r-title">—</h2>
+        <button class="by" id="r-author">المؤلف</button>
+        <div class="row" style="justify-content:center;margin-bottom:10px">
+          <button class="btn btn-teal btn-sm" id="r-save-lib">حفظ في مكتبتي</button>
+          <button class="btn btn-ghost btn-sm" id="r-export">تصدير الفصل</button>
+        </div>
+        <div class="chap-nav">
+          <button class="btn btn-ghost btn-sm" id="r-prev">السابق</button>
+          <select id="r-chap"></select>
+          <button class="btn btn-ghost btn-sm" id="r-next">التالي</button>
+        </div>
+        <div class="reader-body" id="r-body"></div>
+      </article>
+      <button class="btn btn-ghost" id="r-back">رجوع</button>
+    </div>
+
+    <div id="p-profile" class="pane hidden">
+      <div class="card profile">
+        <div class="pav" id="pf-av">أ</div>
+        <h2 id="pf-name">—</h2>
+        <p style="color:var(--muted);margin:0" id="pf-sub">أعمال منشورة</p>
+        <div class="stat"><span id="pf-count">0</span> أعمال</div>
+      </div>
+      <h3 class="section-t">الأعمال</h3>
+      <div id="pf-works" class="grid"></div>
+    </div>
+  </main>
+
+  <button class="fab hidden" id="fab">+</button>
+  <nav class="bottom">
+    <div class="nav">
+      <div class="slider" id="slider"></div>
+      <button class="on" data-t="plaza">الساحة الأدبية</button>
+      <button data-t="blog">تدوينة</button>
+      <button data-t="khayal">قسم خيال</button>
+    </div>
+  </nav>
+
+  <div id="drawer" class="drawer hidden">
+    <div class="scrim" id="scrim"></div>
+    <aside class="panel">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px">
+        <div class="av" id="d-av">أ</div>
+        <div><strong id="d-name">—</strong><div style="font-size:12px;color:#757575">حسابي</div></div>
+      </div>
+      <button class="d-item" id="d-profile">الملف الشخصي</button>
+      <button class="d-item" id="d-lib">مكتبتي</button>
+      <button class="d-item" id="d-settings">إعدادات القراءة</button>
+      <button class="d-item" id="d-refresh">تحديث</button>
+      <button class="d-item danger" id="d-out">تسجيل خروج</button>
+      <p class="note" style="text-align:right">نسخة ويب موسّعة. بعض خصائص أندرويد الأصلية تبقى في تطبيق الهاتف.</p>
+    </aside>
+  </div>
+</section>
+
+<div id="modal" class="modal hidden">
+  <div class="scrim" id="modal-scrim"></div>
+  <div class="box">
+    <h3 id="modal-title" class="section-t">—</h3>
+    <div id="modal-body"></div>
+    <button class="btn btn-ghost" id="modal-close" style="margin-top:12px">إغلاق</button>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<div id="loading" class="loading hidden"><div class="spinner"></div></div>
+</div>
+
+<script>
+const SUPABASE_URL="https://fatoynueyvvebibpbkow.supabase.co";
+const SUPABASE_KEY="sb_publishable_I4uBK-o8LB43j6kgb5XTqg_wdqvRN6g";
+const USERS=SUPABASE_URL+"/rest/v1/users";
+const COMMUNITY=SUPABASE_URL+"/rest/v1/community";
+const NOVELS=SUPABASE_URL+"/rest/v1/novels";
+const LS_WORKS="story_web_works_v2";
+const LS_LIB="story_web_library_v2";
+const LS_POS="story_web_lastpos_v2";
+const LS_SET="story_web_settings_v2";
+const LS_DRAFT="story_web_post_draft_v2";
+
+const S={user:null,tab:"plaza",novels:[],posts:[],localWorks:[],library:[],filter:"all",reader:null,chap:0,edit:null,editChap:0,editPage:0,profile:null,settings:{fontSize:17,lineHeight:1.95,protect:true}};
+const $=id=>document.getElementById(id);
+const show=el=>el&&el.classList.remove("hidden");
+const hide=el=>el&&el.classList.add("hidden");
+function toast(m){const t=$("toast");t.textContent=m;show(t);clearTimeout(toast.tm);toast.tm=setTimeout(()=>hide(t),2500)}
+function loading(v){v?show($("loading")):hide($("loading"))}
+function letter(s){return ((s||"?").trim().charAt(0)||"?").toUpperCase()}
+function hashPassword(p){let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0}return "h_"+Math.abs(h).toString(36)+"_"+p.length}
+function parseArr(v){if(Array.isArray(v))return v;if(typeof v==="string"){try{return JSON.parse(v)}catch{return[]}}return[]}
+function loadLS(key,fb){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fb))}catch{return fb}}
+function saveLS(key,val){localStorage.setItem(key,JSON.stringify(val))}
+
+async function api(url,opt={}){
+  const headers={apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json",...(opt.body?{"Content-Type":"application/json"}:{}),...(opt.headers||{})};
+  const res=await fetch(url,{...opt,headers});
+  const text=await res.text(); let data=null;
+  try{data=text?JSON.parse(text):null}catch{data=text}
+  if(!res.ok) throw new Error((data&&(data.message||data.error))||text||("HTTP "+res.status));
+  return data;
+}
+function mapNovel(row){
+  return {
+    novelId:row.novel_id||row.novelId||row.id||"",
+    title:row.title||"", author:row.author_username||row.author||row.username||"",
+    authorId:row.author_id||row.authorId||"",
+    introduction:row.introduction||"", description:row.description||"",
+    category:row.category||"", section:row.section||"", bookPart:row.book_part||row.bookPart||"",
+    contentKind:row.content_kind||row.contentKind||"novel",
+    coverUrl:row.cover_url||row.coverUrl||"", coverBase64:row.cover_base64||row.coverBase64||"",
+    chapterTitles:parseArr(row.chapter_titles||row.chapterTitles||row.titles),
+    chapterContents:parseArr(row.chapter_contents||row.chapterContents||row.contents),
+    paragraphs:parseArr(row.paragraphs),
+    pages:parseArr(row.pages), footnotes:parseArr(row.footnotes),
+    footnoteMode:row.footnote_mode||row.footnoteMode||"continuous",
+    readers:Number(row.readers||0), local:!!row._local
+  };
+}
+function coverSrc(n){
+  if(!n) return "";
+  let u=(n.coverUrl||"").trim();
+  if(u.startsWith("http")||u.startsWith("data:image")) return u;
+  if(u.includes("storage/v1/object/public")) return u.startsWith("http")?u:SUPABASE_URL+(u.startsWith("/")?u:"/"+u);
+  let b=n.coverBase64||"";
+  if(b.length>80) return b.startsWith("data:image")?b:"data:image/jpeg;base64,"+b.replace(/^data:image\/[^;]+;base64,/,"");
+  return "";
+}
+function setCover(el,n,fb){
+  el.innerHTML=""; el.textContent=fb||letter(n&&n.title);
+  const src=coverSrc(n); if(!src) return;
+  const img=new Image(); img.alt=n.title||""; img.referrerPolicy="no-referrer";
+  img.onload=()=>{el.textContent="";el.appendChild(img)}; img.src=src;
+}
+function countWords(t){t=(t||"").trim(); return t?t.split(/\s+/).length:0}
+
+function showLogin(){hide($("s-main"));hide($("s-reg"));show($("s-login"))}
+function showReg(){hide($("s-main"));hide($("s-login"));show($("s-reg"))}
+function showMain(){hide($("s-login"));hide($("s-reg"));show($("s-main"));paintUser();go("plaza")}
+function paintUser(){const n=S.user?S.user.username:"؟";const L=letter(n);$("btn-me").textContent=L;$("d-name").textContent=n;$("d-av").textContent=L}
+
+async function doLogin(u,p){
+  if(!u||!p) return toast("أدخل البيانات");
+  loading(true);
+  try{
+    const rows=await api(USERS+"?username=eq."+encodeURIComponent(u)+"&select=*");
+    if(!rows||!rows.length) throw new Error("بيانات الدخول غير صحيحة");
+    const row=rows[0]; const hashed=hashPassword(p); const stored=row.password||row.password_hash||"";
+    if(stored&&stored!==hashed&&stored!==p) throw new Error("بيانات الدخول غير صحيحة");
+    S.user={authorId:row.author_id||row.authorId||"",username:row.username||u};
+    localStorage.setItem("story_user",JSON.stringify(S.user));
+    toast("تم تسجيل الدخول"); showMain(); await refresh();
+  }catch(e){toast(e.message||"تعذر الدخول")} finally{loading(false)}
+}
+async function doReg(u,p){
+  loading(true);
+  try{
+    const all=await api(USERS+"?select=username");
+    if((all||[]).some(r=>(r.username||"").toLowerCase()===u.toLowerCase())) throw new Error("الاسم مستخدم");
+    const authorId="author_"+Date.now();
+    await api(USERS,{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({author_id:authorId,username:u,password:hashPassword(p),joined_at:Date.now()})});
+    S.user={authorId,username:u}; localStorage.setItem("story_user",JSON.stringify(S.user));
+    toast("تم إنشاء الحساب"); showMain(); await refresh();
+  }catch(e){toast((e.message||"").replace(/Could not find the '[^']+' column[\s\S]*/i,"حقل غير موجود في قاعدة البيانات")||"تعذر التسجيل")}
+  finally{loading(false)}
+}
+function logout(){S.user=null;localStorage.removeItem("story_user");showLogin()}
+
+async function loadNovels(){
+  try{const rows=await api(NOVELS+"?select=*&order=created_at.desc"); S.novels=(Array.isArray(rows)?rows:[]).map(mapNovel)}
+  catch{S.novels=[]}
+  renderNovels(); renderWorks(); updateResumeBanner();
+}
+async function loadPosts(){
+  try{
+    const rows=await api(COMMUNITY+"?select=*&order=created_at.desc"); const now=Date.now();
+    S.posts=(Array.isArray(rows)?rows:[]).filter(p=>{
+      const id=String(p.post_id||p.id||""); if(!id||id.startsWith("_followers_")) return false;
+      if(p.username==="_system"||p.text==="followers_meta") return false;
+      let exp=Number(p.expires_at||0); const c=Number(p.created_at||0); if(!exp&&c) exp=c+7*86400000;
+      return !(exp&&exp<now);
+    });
+  }catch{S.posts=[]}
+  renderPosts();
+}
+async function refresh(){loading(true); try{await Promise.all([loadNovels(),loadPosts()]); loadLocal(); renderLib()} finally{loading(false)}}
+function loadLocal(){
+  S.localWorks=loadLS(LS_WORKS,[]);
+  S.library=loadLS(LS_LIB,[]);
+  const now=Date.now(); S.library=S.library.filter(x=>(x.savedAt||0)+30*86400000>now); saveLS(LS_LIB,S.library);
+  S.settings=Object.assign({fontSize:17,lineHeight:1.95,protect:true}, loadLS(LS_SET,{}));
+  applySettingsUI();
+  const draft=localStorage.getItem(LS_DRAFT); if(draft) $("post-text").value=draft;
+}
+
+function novelCard(n,extra){
+  const el=document.createElement("article"); el.className="novel";
+  el.innerHTML=`<div class="cover"></div><div class="meta"><h4></h4><p class="author"></p><p class="sub"></p></div>`;
+  setCover(el.querySelector(".cover"),n,letter(n.title));
+  el.querySelector("h4").textContent=n.title||"بدون عنوان";
+  el.querySelector(".author").textContent=n.author||"مؤلف";
+  const sub=[n.category,n.section,n.bookPart?("جزء "+n.bookPart):"",n.local?"محلي":"",n.readers? (n.readers+" قارئ"):""].filter(Boolean).join(" · ");
+  el.querySelector(".sub").textContent=sub;
+  el.querySelector(".author").onclick=e=>{e.stopPropagation();openProfile(n.authorId,n.author)};
+  el.onclick=()=>{ if(extra&&extra.onClick) extra.onClick(n); else openReader(n); };
+  return el;
+}
+function renderNovels(){
+  const q=($("q").value||"").trim().toLowerCase(); const box=$("novels"); box.innerHTML="";
+  let list=S.novels.slice();
+  if(q) list=list.filter(n=>(n.title||"").toLowerCase().includes(q)||(n.author||"").toLowerCase().includes(q));
+  $("plaza-empty").classList.toggle("hidden",list.length>0);
+  list.forEach(n=>box.appendChild(novelCard(n)));
+}
+function renderWorks(){
+  const box=$("works"); box.innerHTML="";
+  const my=S.user?S.user.authorId:"";
+  let cloud=S.novels.filter(n=>n.authorId===my);
+  let local=S.localWorks.filter(n=>n.authorId===my).map(n=>({...n,local:true}));
+  const map=new Map(); cloud.forEach(n=>map.set(n.novelId,n)); local.forEach(n=>map.set(n.novelId,{...map.get(n.novelId),...n,local:true}));
+  let list=[...map.values()];
+  const f=S.filter;
+  if(f==="series") list=list.filter(n=>n.contentKind==="series"||/سلسلة|series/i.test((n.section||"")+(n.category||"")));
+  if(f==="stories") list=list.filter(n=>n.contentKind==="novel"||/قصة|stories/i.test((n.section||"")+n.category));
+  if(f==="book") list=list.filter(n=>n.contentKind==="book"||/تأليف|book/i.test(n.section||""));
+  if(!list.length){box.innerHTML='<div class="empty">لا أعمال — أنشئ عملاً جديداً</div>';return}
+  list.forEach(n=>box.appendChild(novelCard(n,{onClick:x=>openEditor(x)})));
+}
+function renderLib(){
+  const box=$("lib-grid"); box.innerHTML="";
+  $("lib-empty").classList.toggle("hidden",S.library.length>0);
+  S.library.forEach(n=>{
+    const card=novelCard(n);
+    const del=document.createElement("button");
+    del.className="btn btn-danger btn-sm"; del.textContent="حذف"; del.style.cssText="position:absolute;top:8px;left:8px;width:auto";
+    del.onclick=e=>{e.stopPropagation(); S.library=S.library.filter(x=>x.novelId!==n.novelId); saveLS(LS_LIB,S.library); renderLib(); toast("حُذف")};
+    card.style.position="relative"; card.appendChild(del); box.appendChild(card);
+  });
+}
+function renderPosts(){
+  const box=$("posts"); box.innerHTML=""; $("blog-empty").classList.toggle("hidden",S.posts.length>0);
+  const myId=S.user?S.user.authorId:"";
+  S.posts.forEach(p=>{
+    const user=p.username||"مستخدم"; const likes=parseArr(p.likes); const comments=parseArr(p.comments);
+    const liked=likes.includes(myId); const created=Number(p.created_at||0);
+    const mine=(p.author_id||p.authorId||"")===myId;
+    const card=document.createElement("article"); card.className="post";
+    card.innerHTML=`<div class="post-h"><div class="av"></div><div style="flex:1"><div class="post-user"></div><div class="post-time"></div></div>
+      ${mine?'<button class="chip-btn" data-a="more">⋯</button>':''}</div>
+      <p class="post-text"></p>
+      <div class="actions">
+        <button class="chip-btn ${liked?"liked":""}" data-a="like">${liked?"أعجبني":"إعجاب"} · ${likes.length}</button>
+        <button class="chip-btn" data-a="c">تعليقات · ${comments.length}</button>
+      </div><div class="comments hidden"></div>`;
+    card.querySelector(".av").textContent=letter(user);
+    card.querySelector(".post-user").textContent=user;
+    card.querySelector(".post-user").onclick=()=>openProfile(p.author_id||p.authorId||"",user);
+    card.querySelector(".post-time").textContent=created?new Date(created).toLocaleString("ar"):"";
+    card.querySelector(".post-text").textContent=p.text||"";
+    card.querySelector('[data-a="like"]').onclick=async()=>{try{await toggleLike(p,likes,myId);await loadPosts()}catch(e){toast(e.message)}};
+    card.querySelector('[data-a="c"]').onclick=()=>{const c=card.querySelector(".comments");c.classList.toggle("hidden");if(!c.classList.contains("hidden"))fillComments(c,p,comments)};
+    const more=card.querySelector('[data-a="more"]');
+    if(more) more.onclick=()=>postMenu(p);
+    box.appendChild(card);
+  });
+}
+function postMenu(p){
+  openModal("خيارات المنشور", `
+    <button class="btn btn-ghost" id="m-edit" style="margin-bottom:8px">تعديل</button>
+    <button class="btn btn-danger" id="m-del">حذف</button>
+  `);
+  $("m-edit").onclick=async()=>{
+    const t=prompt("تعديل النص", p.text||""); if(t==null) return;
+    try{
+      await api(COMMUNITY+"?post_id=eq."+encodeURIComponent(p.post_id||p.id),{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({text:t.trim()})});
+      closeModal(); toast("تم التعديل"); await loadPosts();
+    }catch(e){toast(e.message)}
+  };
+  $("m-del").onclick=async()=>{
+    if(!confirm("حذف المنشور؟")) return;
+    try{
+      await api(COMMUNITY+"?post_id=eq."+encodeURIComponent(p.post_id||p.id),{method:"DELETE",headers:{Prefer:"return=minimal"}});
+      closeModal(); toast("تم الحذف"); await loadPosts();
+    }catch(e){toast(e.message)}
+  };
+}
+function fillComments(box,post,comments){
+  box.innerHTML="";
+  comments.forEach((c,ci)=>{
+    const row=document.createElement("div"); row.className="c-row";
+    row.innerHTML=`<strong></strong> <span></span>
+      <div class="para-tools"><button class="chip-btn" data-r="1">رد</button></div>`;
+    row.querySelector("strong").textContent=(c.username||"مستخدم")+":";
+    row.querySelector("span").textContent=" "+(c.text||"");
+    parseArr(c.replies).forEach(r=>{const rr=document.createElement("div");rr.className="reply";rr.textContent=(r.username||"")+": "+(r.text||"");row.appendChild(rr)});
+    row.querySelector('[data-r="1"]').onclick=async()=>{
+      const t=prompt("اكتب رداً"); if(!t) return;
+      try{
+        const next=comments.slice(); const replies=parseArr(next[ci].replies);
+        replies.push({id:"r_"+Date.now(),authorId:S.user.authorId,username:S.user.username,text:t.trim(),createdAt:Date.now()});
+        next[ci]={...next[ci],replies};
+        await api(COMMUNITY+"?post_id=eq."+encodeURIComponent(post.post_id||post.id),{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({comments:next})});
+        toast("تم الرد"); await loadPosts();
+      }catch(e){toast(e.message)}
+    };
+    box.appendChild(row);
+  });
+  const form=document.createElement("div"); form.className="c-form";
+  form.innerHTML=`<input placeholder="تعليق..."/><button class="btn btn-blue btn-sm">إرسال</button>`;
+  form.querySelector("button").onclick=async()=>{
+    const t=form.querySelector("input").value.trim(); if(!t) return;
+    try{await addComment(post,comments,t);toast("تم");await loadPosts()}catch(e){toast(e.message)}
+  };
+  box.appendChild(form);
+}
+async function toggleLike(post,likes,myId){
+  if(!myId) throw new Error("سجّل دخولك");
+  const next=likes.slice(); const i=next.indexOf(myId); if(i>=0) next.splice(i,1); else next.push(myId);
+  await api(COMMUNITY+"?post_id=eq."+encodeURIComponent(post.post_id||post.id),{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({likes:next})});
+}
+async function addComment(post,comments,text){
+  if(!S.user) throw new Error("سجّل دخولك");
+  const next=comments.concat([{id:"c_"+Date.now(),authorId:S.user.authorId,username:S.user.username,text,createdAt:Date.now(),likes:[],replies:[]}]);
+  await api(COMMUNITY+"?post_id=eq."+encodeURIComponent(post.post_id||post.id),{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({comments:next})});
+}
+async function publishPost(){
+  if(!S.user) return toast("سجّل دخولك");
+  const text=$("post-text").value.trim(); if(!text) return toast("اكتب شيئاً");
+  const days=Number($("post-exp").value||7); loading(true);
+  try{
+    await api(COMMUNITY,{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({post_id:"post_"+Date.now(),author_id:S.user.authorId,username:S.user.username,text,likes:[],comments:[],created_at:Date.now(),expires_at:Date.now()+days*86400000,expire_days:days})});
+    $("post-text").value=""; localStorage.removeItem(LS_DRAFT); toast("تم النشر"); await loadPosts();
+  }catch(e){toast(e.message||"تعذر النشر")} finally{loading(false)}
+}
+function saveDraft(){localStorage.setItem(LS_DRAFT,$("post-text").value||""); toast("حُفظت المسودة")}
+
+function chapterCount(n){return Math.max((n.chapterTitles||[]).length,(n.chapterContents||[]).length,(n.paragraphs||[]).length,(n.pages||[]).length,1)}
+function chapterText(n,idx){
+  const titles=n.chapterTitles||[], contents=n.chapterContents||[], paras=n.paragraphs||[];
+  let title=titles[idx]||("الفصل "+(idx+1)); let body="";
+  if(contents[idx]) body=String(contents[idx]);
+  if(!body&&Array.isArray(paras[idx])) body=paras[idx].map(p=>(p&&(p.text||p.content))||"").filter(Boolean).join("\n\n");
+  else if(!body&&idx===0&&Array.isArray(paras)&&paras.length&&!Array.isArray(paras[0])) body=paras.map(p=>(p&&(p.text||p.content))||"").filter(Boolean).join("\n\n");
+  if(!body&&n.pages&&n.pages[idx]) body=String(n.pages[idx].body||n.pages[idx]||"");
+  if(!body&&idx===0) body=[n.introduction,n.description].filter(Boolean).join("\n\n");
+  if(!body) body="لا يوجد نص لهذا الفصل.";
+  return {title,body};
+}
+function openReader(n){
+  S.reader=n; 
+  const pos=loadLS(LS_POS,{});
+  S.chap=Number((pos[n.novelId]&&pos[n.novelId].chap)||0);
+  go("reader","قراءة");
+  $("r-title").textContent=n.title||""; $("r-author").textContent="المؤلف: "+(n.author||"مؤلف");
+  $("r-author").onclick=()=>openProfile(n.authorId,n.author);
+  setCover($("r-cover"),n,letter(n.title));
+  const sel=$("r-chap"); sel.innerHTML="";
+  for(let i=0;i<chapterCount(n);i++){const o=document.createElement("option");o.value=i;o.textContent=(n.chapterTitles&&n.chapterTitles[i])||("الفصل "+(i+1));sel.appendChild(o)}
+  applyReaderStyle(); renderChapter();
+}
+function applyReaderStyle(){
+  const body=$("r-body"); const sheet=$("reader-sheet");
+  body.style.fontSize=(S.settings.fontSize||17)+"px";
+  body.style.lineHeight=String(S.settings.lineHeight||1.95);
+  sheet.classList.toggle("protect", !!S.settings.protect);
+}
+function renderChapter(){
+  if(!S.reader) return;
+  const count=chapterCount(S.reader); S.chap=Math.max(0,Math.min(S.chap,count-1));
+  $("r-chap").value=String(S.chap);
+  const ch=chapterText(S.reader,S.chap);
+  // footnotes markers
+  let html=escapeHtml(ch.title)+"\n\n"+escapeHtml(ch.body);
+  html=html.replace(/\[(\d+)\]/g,'<span class="fn-ref">[$1]</span>');
+  $("r-body").innerHTML=html.replace(/\n/g,"<br>");
+  // save position
+  const pos=loadLS(LS_POS,{}); pos[S.reader.novelId]={chap:S.chap,at:Date.now(),title:S.reader.title}; saveLS(LS_POS,pos);
+  updateResumeBanner();
+}
+function escapeHtml(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function updateResumeBanner(){
+  const pos=loadLS(LS_POS,{});
+  const entries=Object.entries(pos).sort((a,b)=>(b[1].at||0)-(a[1].at||0));
+  if(!entries.length){hide($("resume-banner"));return}
+  const [id,info]=entries[0];
+  const novel=S.novels.find(n=>n.novelId===id)||S.localWorks.find(n=>n.novelId===id)||S.library.find(n=>n.novelId===id);
+  if(!novel){hide($("resume-banner"));return}
+  show($("resume-banner"));
+  $("resume-text").textContent=`أكمل قراءة: ${info.title||novel.title} — فصل ${(info.chap||0)+1}`;
+  $("btn-resume").onclick=()=>openReader({...novel, ...info.chap!=null?{}:{}});
+  // open at saved chap handled in openReader via LS_POS
+}
+function saveToLibrary(){
+  if(!S.reader) return;
+  const n={...S.reader,savedAt:Date.now()};
+  S.library=S.library.filter(x=>x.novelId!==n.novelId); S.library.unshift(n);
+  saveLS(LS_LIB,S.library); toast("حُفظ في مكتبتي 30 يوماً");
+}
+function exportCurrentChapter(){
+  if(!S.reader) return;
+  const ch=chapterText(S.reader,S.chap);
+  downloadText((S.reader.title||"chapter")+"-"+((S.chap||0)+1)+".txt", ch.title+"\n\n"+ch.body);
+}
+function downloadText(name,text){
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"})); a.download=name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function openProfile(authorId,username){
+  S.profile={authorId:authorId||"",username:username||"مؤلف"}; go("profile","الملف الشخصي");
+  $("pf-name").textContent=S.profile.username; $("pf-av").textContent=letter(S.profile.username);
+  const works=S.novels.filter(n=>n.authorId===authorId);
+  $("pf-count").textContent=String(works.length);
+  $("pf-sub").textContent=(S.user&&authorId===S.user.authorId)?"هذا حسابك":"أعمال منشورة";
+  const box=$("pf-works"); box.innerHTML="";
+  if(!works.length) box.innerHTML='<div class="empty">لا أعمال</div>'; else works.forEach(n=>box.appendChild(novelCard(n)));
+}
+
+function createWork(){
+  if(!S.user) return toast("سجّل دخولك");
+  const title=$("c-title").value.trim(); if(!title) return toast("أدخل العنوان");
+  const kind=$("c-kind").value;
+  const work={
+    novelId:"local_"+Date.now(), title,
+    author:$("c-author").value.trim()||S.user.username,
+    authorId:S.user.authorId, description:$("c-desc").value.trim(),
+    contentKind:kind==="book"?"book":kind==="series"?"series":"novel",
+    bookPart:$("c-part").value.trim(),
+    coverUrl:$("c-cover").value.trim(), coverBase64:$("c-cover-b64").value.trim(),
+    chapterTitles:["الفصل 1"], chapterContents:[""],
+    paragraphs:[[]], pages:[{body:"",notes:[]}], footnotes:[], footnoteMode:"continuous", maxLines:36, local:true
+  };
+  S.localWorks.unshift(work); saveLS(LS_WORKS,S.localWorks);
+  toast("تم إنشاء العمل"); openEditor(work);
+}
+function openEditor(n){
+  let w=S.localWorks.find(x=>x.novelId===n.novelId);
+  if(!w){
+    w={...n,
+      chapterTitles:n.chapterTitles&&n.chapterTitles.length?n.chapterTitles.slice():["الفصل 1"],
+      chapterContents:n.chapterContents&&n.chapterContents.length?n.chapterContents.slice():[""],
+      paragraphs:Array.isArray(n.paragraphs)?JSON.parse(JSON.stringify(n.paragraphs)):[[]],
+      pages:Array.isArray(n.pages)&&n.pages.length?JSON.parse(JSON.stringify(n.pages)):[{body:"",notes:[]}],
+      footnotes:parseArr(n.footnotes), footnoteMode:n.footnoteMode||"continuous", maxLines:n.maxLines||36, local:true
+    };
+    S.localWorks.unshift(w); saveLS(LS_WORKS,S.localWorks);
+  }
+  S.edit=w; S.editChap=0; S.editPage=0; go("editor","المحرر");
+  $("e-title").textContent=w.title||"";
+  $("e-mode").value=w.contentKind==="book"?"book":(Array.isArray(w.paragraphs)&&w.paragraphs[0]&&w.paragraphs[0].length?"paragraphs":"chapter");
+  $("e-fn-mode").value=w.footnoteMode||"continuous";
+  $("e-max-lines").value=w.maxLines||36;
+  syncEditorChapSelect(); loadEditorChap(); updateEditorMode(); updateStats();
+}
+function syncEditorChapSelect(){
+  const sel=$("e-chap"); sel.innerHTML="";
+  (S.edit.chapterTitles||[]).forEach((t,i)=>{const o=document.createElement("option");o.value=i;o.textContent=t||("الفصل "+(i+1));sel.appendChild(o)});
+  sel.value=String(S.editChap);
+}
+function updateEditorMode(){
+  const m=$("e-mode").value;
+  $("e-chapter-box").classList.toggle("hidden",m!=="chapter");
+  $("e-para-box").classList.toggle("hidden",m!=="paragraphs");
+  $("e-book-box").classList.toggle("hidden",m!=="book");
+  if(m==="paragraphs") renderParas();
+  if(m==="book") renderBookPage();
+}
+function loadEditorChap(){
+  if(!S.edit) return;
+  const i=S.editChap;
+  $("e-ch-title").value=(S.edit.chapterTitles[i])||"";
+  $("e-ch-body").value=(S.edit.chapterContents[i])||"";
+  $("e-chap").value=String(i);
+  if(!Array.isArray(S.edit.paragraphs[i])) S.edit.paragraphs[i]=[];
+  updateEditorMode(); updateStats();
+}
+function commitEditorChap(){
+  if(!S.edit) return;
+  const i=S.editChap;
+  S.edit.chapterTitles[i]=$("e-ch-title").value;
+  if($("e-mode").value==="chapter") S.edit.chapterContents[i]=$("e-ch-body").value;
+  if($("e-mode").value==="book") commitBookPage();
+  S.edit.footnoteMode=$("e-fn-mode").value;
+  S.edit.maxLines=Number($("e-max-lines").value||36);
+}
+function renderParas(){
+  const box=$("e-paras"); box.innerHTML="";
+  const list=S.edit.paragraphs[S.editChap]||[];
+  list.forEach((p,idx)=>{
+    const wrap=document.createElement("div"); wrap.className="page-sheet";
+    wrap.innerHTML=`<label>فقرة ${idx+1}</label><textarea rows="4"></textarea>
+      <div class="para-tools"><button class="btn btn-danger btn-sm">حذف</button></div>`;
+    wrap.querySelector("textarea").value=p.text||"";
+    wrap.querySelector("textarea").oninput=e=>{S.edit.paragraphs[S.editChap][idx].text=e.target.value; syncParasToContent(); updateStats()};
+    wrap.querySelector("button").onclick=()=>{S.edit.paragraphs[S.editChap].splice(idx,1); syncParasToContent(); renderParas(); updateStats()};
+    box.appendChild(wrap);
+  });
+  if(!list.length) box.innerHTML='<div class="empty">لا فقرات — اضغط + فقرة</div>';
+}
+function syncParasToContent(){
+  const list=S.edit.paragraphs[S.editChap]||[];
+  S.edit.chapterContents[S.editChap]=list.map(p=>p.text||"").join("\n\n");
+}
+function addPara(){
+  if(!S.edit.paragraphs[S.editChap]) S.edit.paragraphs[S.editChap]=[];
+  S.edit.paragraphs[S.editChap].push({id:"p_"+Date.now(),text:"",createdAt:Date.now()});
+  $("e-mode").value="paragraphs"; updateEditorMode(); renderParas();
+}
+function renderBookPage(){
+  if(!S.edit.pages||!S.edit.pages.length) S.edit.pages=[{body:"",notes:[]}];
+  if(S.editPage>=S.edit.pages.length) S.editPage=S.edit.pages.length-1;
+  if(S.editPage<0) S.editPage=0;
+  const page=S.edit.pages[S.editPage];
+  $("e-page-num").textContent=String(S.editPage+1);
+  $("e-page-body").value=page.body||"";
+  const list=$("e-fn-list"); list.innerHTML="";
+  (page.notes||[]).forEach((n,i)=>{
+    const row=document.createElement("div"); row.className="row"; row.style.marginBottom="6px";
+    row.innerHTML=`<span class="fn-ref">[${i+1}]</span><input style="margin:0;flex:1"/><button class="btn btn-danger btn-sm">×</button>`;
+    row.querySelector("input").value=n;
+    row.querySelector("input").oninput=e=>{S.edit.pages[S.editPage].notes[i]=e.target.value};
+    row.querySelector("button").onclick=()=>{S.edit.pages[S.editPage].notes.splice(i,1); renderBookPage()};
+    list.appendChild(row);
+  });
+}
+function commitBookPage(){
+  if(!S.edit.pages[S.editPage]) S.edit.pages[S.editPage]={body:"",notes:[]};
+  S.edit.pages[S.editPage].body=$("e-page-body").value;
+  // sync pages into chapter content for reading
+  S.edit.chapterContents[S.editChap]=(S.edit.pages||[]).map((p,i)=>{
+    let t=p.body||"";
+    (p.notes||[]).forEach((note,ni)=>{ if(note) t += `\n[${ni+1}] ${note}`; });
+    return t;
+  }).join("\n\n————\n\n");
+}
+function addFootnoteMarker(){
+  const ta=$("e-mode").value==="book"?$("e-page-body"):$("e-ch-body");
+  const notes=($("e-mode").value==="book"?(S.edit.pages[S.editPage].notes||[]):(S.edit.footnotes||[]));
+  const num=notes.length+1;
+  const start=ta.selectionStart||ta.value.length;
+  const val=ta.value;
+  ta.value=val.slice(0,start)+`[${num}]`+val.slice(start);
+  if($("e-mode").value==="book"){
+    if(!S.edit.pages[S.editPage].notes) S.edit.pages[S.editPage].notes=[];
+    S.edit.pages[S.editPage].notes.push("");
+    renderBookPage();
+  } else {
+    if(!S.edit.footnotes) S.edit.footnotes=[];
+    S.edit.footnotes.push("");
+  }
+  toast("أُضيف مرجع هامش ["+num+"]");
+}
+function updateStats(){
+  let text="";
+  if($("e-mode").value==="chapter") text=$("e-ch-body").value||"";
+  else if($("e-mode").value==="paragraphs") text=(S.edit.paragraphs[S.editChap]||[]).map(p=>p.text||"").join(" ");
+  else text=$("e-page-body").value||"";
+  $("e-words").textContent="كلمات: "+countWords(text);
+  $("e-chars").textContent="أحرف: "+(text||"").length;
+}
+function saveEditor(){
+  commitEditorChap();
+  const idx=S.localWorks.findIndex(x=>x.novelId===S.edit.novelId);
+  if(idx>=0) S.localWorks[idx]=S.edit; else S.localWorks.unshift(S.edit);
+  saveLS(LS_WORKS,S.localWorks); toast("تم الحفظ محلياً"); renderWorks();
+}
+async function publishEditor(){
+  if(!S.user||!S.edit) return;
+  commitEditorChap(); saveEditor();
+  loading(true);
+  try{
+    const body={
+      novel_id:S.edit.novelId.startsWith("local_")?("novel_"+Date.now()):S.edit.novelId,
+      title:S.edit.title, author_id:S.user.authorId, author_username:S.user.username,
+      description:S.edit.description||"", introduction:"", continuous:true,
+      category:S.edit.category||"", section:S.edit.section||"", book_part:S.edit.bookPart||"",
+      novel_type:"fiction", content_kind:S.edit.contentKind||"novel",
+      cover_url:S.edit.coverUrl||"", cover_base64:S.edit.coverBase64||"",
+      chapter_titles:S.edit.chapterTitles||[], chapter_contents:S.edit.chapterContents||[],
+      paragraphs:S.edit.paragraphs||[], footnote_mode:S.edit.footnoteMode||"continuous",
+      created_at:new Date().toISOString()
+    };
+    await api(NOVELS,{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify(body)});
+    S.edit.novelId=body.novel_id; saveEditor();
+    toast("تم إرسال العمل للنشر"); await loadNovels();
+  }catch(e){toast("تعذر النشر: "+(e.message||"تحقق من أعمدة novels"))}
+  finally{loading(false)}
+}
+function exportWorkTxt(){
+  commitEditorChap();
+  let out=(S.edit.title||"")+"\n"+(S.edit.author||"")+"\n\n";
+  (S.edit.chapterTitles||[]).forEach((t,i)=>{out+= (t||("الفصل "+(i+1)))+"\n\n"+(S.edit.chapterContents[i]||"")+"\n\n"});
+  downloadText((S.edit.title||"work")+".txt", out);
+}
+function exportWorkHtml(){
+  commitEditorChap();
+  let body=`<h1>${escapeHtml(S.edit.title||"")}</h1><p>${escapeHtml(S.edit.author||"")}</p>`;
+  (S.edit.chapterTitles||[]).forEach((t,i)=>{body+=`<h2>${escapeHtml(t||("الفصل "+(i+1)))}</h2><div>${escapeHtml(S.edit.chapterContents[i]||"").replace(/\n/g,"<br>")}</div>`});
+  downloadText((S.edit.title||"work")+".html", `<!DOCTYPE html><html lang="ar" dir="rtl"><meta charset="utf-8"><body>${body}</body></html>`);
+}
+function applySettingsUI(){
+  $("set-size").value=S.settings.fontSize||17; $("set-size-val").textContent=String(S.settings.fontSize||17);
+  $("set-lh").value=Math.round((S.settings.lineHeight||1.95)*100); $("set-lh-val").textContent=String(S.settings.lineHeight||1.95);
+  $("set-protect").checked=!!S.settings.protect;
+}
+function saveSettings(){
+  S.settings.fontSize=Number($("set-size").value||17);
+  S.settings.lineHeight=Number($("set-lh").value||195)/100;
+  S.settings.protect=!!$("set-protect").checked;
+  saveLS(LS_SET,S.settings); applyReaderStyle(); toast("حُفظت الإعدادات");
+}
+function openModal(title, bodyHtml){ $("modal-title").textContent=title; $("modal-body").innerHTML=bodyHtml; show($("modal")); }
+function closeModal(){ hide($("modal")); }
+
+function go(tab,title){
+  S.tab=tab;
+  ["plaza","blog","khayal","library","settings","create","editor","reader","profile"].forEach(t=>{const el=$("p-"+t); if(el) el.classList.toggle("hidden",t!==tab)});
+  const titles={plaza:"الساحة الأدبية",blog:"تدوينة",khayal:"قسم خيال",library:"مكتبتي",settings:"الإعدادات",create:"إنشاء عمل",editor:"المحرر",reader:"قراءة",profile:"الملف الشخصي"};
+  $("title").textContent=title||titles[tab]||"";
+  const order=["plaza","blog","khayal"]; const idx=order.indexOf(tab);
+  document.querySelectorAll(".nav button").forEach((b,i)=>b.classList.toggle("on",order[i]===tab));
+  const sl=$("slider");
+  if(idx>=0){sl.style.background=["#1565C0","#7B1FA2","#00897B"][idx];sl.style.transform=`translateX(${-idx*100}%)`; show(document.querySelector(".bottom"));}
+  $("fab").classList.toggle("hidden",tab!=="khayal");
+  if(tab==="khayal") renderWorks();
+  if(tab==="library") renderLib();
+  if(tab==="settings") applySettingsUI();
+  if(tab==="plaza") updateResumeBanner();
+}
+
+function bind(){
+  $("go-reg").onclick=showReg; $("go-login").onclick=showLogin;
+  $("btn-login").onclick=()=>doLogin($("login-user").value.trim(),$("login-pass").value);
+  $("btn-reg").onclick=()=>{const u=$("reg-user").value.trim(),p1=$("reg-pass").value,p2=$("reg-pass2").value; if(!u||!p1)return toast("أكمل الحقول"); if(p1.length<4)return toast("كلمة المرور قصيرة"); if(p1!==p2)return toast("غير متطابقتين"); doReg(u,p1)};
+  $("btn-post").onclick=publishPost; $("btn-draft").onclick=saveDraft; $("q").oninput=renderNovels;
+  $("btn-menu").onclick=()=>show($("drawer")); $("scrim").onclick=()=>hide($("drawer"));
+  $("d-out").onclick=()=>{hide($("drawer"));logout()};
+  $("d-refresh").onclick=async()=>{hide($("drawer"));await refresh();toast("تم")};
+  $("d-profile").onclick=()=>{hide($("drawer"));if(S.user)openProfile(S.user.authorId,S.user.username)};
+  $("d-lib").onclick=()=>{hide($("drawer"));go("library")};
+  $("d-settings").onclick=()=>{hide($("drawer"));go("settings")};
+  $("btn-me").onclick=()=>{if(S.user)openProfile(S.user.authorId,S.user.username)};
+  $("btn-new-work").onclick=()=>go("create"); $("fab").onclick=()=>go("create");
+  $("btn-open-lib").onclick=()=>go("library");
+  $("btn-create").onclick=createWork; $("btn-create-back").onclick=()=>go("khayal");
+  $("c-kind").onchange=()=>{$("c-part-wrap").classList.toggle("hidden",$("c-kind").value!=="series")};
+  $("e-add-ch").onclick=()=>{commitEditorChap();S.edit.chapterTitles.push("فصل "+(S.edit.chapterTitles.length+1));S.edit.chapterContents.push("");S.edit.paragraphs.push([]);S.editChap=S.edit.chapterTitles.length-1;syncEditorChapSelect();loadEditorChap()};
+  $("e-del-ch").onclick=()=>{if((S.edit.chapterTitles||[]).length<=1)return toast("لا يمكن حذف الفصل الوحيد");commitEditorChap();S.edit.chapterTitles.splice(S.editChap,1);S.edit.chapterContents.splice(S.editChap,1);if(S.edit.paragraphs)S.edit.paragraphs.splice(S.editChap,1);S.editChap=Math.max(0,S.editChap-1);syncEditorChapSelect();loadEditorChap()};
+  $("e-add-para").onclick=addPara; $("e-add-fn").onclick=addFootnoteMarker;
+  $("e-save").onclick=saveEditor; $("e-publish").onclick=publishEditor;
+  $("e-export-txt").onclick=exportWorkTxt; $("e-export-html").onclick=exportWorkHtml;
+  $("e-mode").onchange=()=>{commitEditorChap();updateEditorMode()};
+  $("e-chap").onchange=e=>{commitEditorChap();S.editChap=Number(e.target.value)||0;loadEditorChap()};
+  $("e-prev").onclick=()=>{commitEditorChap();S.editChap=Math.max(0,S.editChap-1);loadEditorChap()};
+  $("e-next").onclick=()=>{commitEditorChap();S.editChap=Math.min((S.edit.chapterTitles.length-1),S.editChap+1);loadEditorChap()};
+  $("e-back").onclick=()=>{commitEditorChap();saveEditor();go("khayal")};
+  $("e-ch-body").oninput=updateStats; $("e-page-body").oninput=updateStats;
+  $("e-fn-add").onclick=()=>{const t=$("e-fn-text").value.trim(); if(!t)return; if(!S.edit.pages[S.editPage].notes)S.edit.pages[S.editPage].notes=[]; S.edit.pages[S.editPage].notes.push(t); $("e-fn-text").value=""; renderBookPage()};
+  $("e-page-prev").onclick=()=>{commitBookPage();S.editPage=Math.max(0,S.editPage-1);renderBookPage()};
+  $("e-page-next").onclick=()=>{commitBookPage();S.editPage=Math.min(S.edit.pages.length-1,S.editPage+1);renderBookPage()};
+  $("e-page-add").onclick=()=>{commitBookPage();S.edit.pages.push({body:"",notes:[]});S.editPage=S.edit.pages.length-1;renderBookPage()};
+  $("e-page-del").onclick=()=>{if(S.edit.pages.length<=1)return toast("لا يمكن حذف الصفحة الوحيدة");S.edit.pages.splice(S.editPage,1);S.editPage=Math.max(0,S.editPage-1);renderBookPage()};
+  $("r-back").onclick=()=>go("plaza"); $("r-prev").onclick=()=>{S.chap--;renderChapter()}; $("r-next").onclick=()=>{S.chap++;renderChapter()};
+  $("r-chap").onchange=e=>{S.chap=Number(e.target.value)||0;renderChapter()};
+  $("r-save-lib").onclick=saveToLibrary; $("r-export").onclick=exportCurrentChapter;
+  $("btn-save-set").onclick=saveSettings;
+  $("set-size").oninput=()=>{$("set-size-val").textContent=$("set-size").value};
+  $("set-lh").oninput=()=>{$("set-lh-val").textContent=(Number($("set-lh").value)/100).toFixed(2)};
+  $("modal-close").onclick=closeModal; $("modal-scrim").onclick=closeModal;
+  document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.t));
+  document.querySelectorAll("#k-chips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#k-chips .chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");S.filter=b.dataset.f;renderWorks()});
+  // prevent context menu on protected reader roughly
+  document.addEventListener("contextmenu",e=>{if(S.settings.protect&&S.tab==="reader") e.preventDefault()});
+}
+async function boot(){
+  bind(); loadLocal();
+  try{const s=localStorage.getItem("story_user"); if(s) S.user=JSON.parse(s)}catch{}
+  if(S.user&&S.user.authorId){showMain();await refresh()} else showLogin();
+}
+boot();
+</script>
+</body>
+</html>
